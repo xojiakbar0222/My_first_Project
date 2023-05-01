@@ -1,0 +1,8 @@
+{% for post in maqolalar %}
+
+    <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+    <p>{{ post.created_at }}</p>
+    <hr>
+
+{% endfor %}
+

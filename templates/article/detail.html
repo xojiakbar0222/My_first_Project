@@ -1,0 +1,286 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load blog_tags %}
+
+<link rel='stylesheet' href="{% static 'css/article.css' %}">
+
+ <main>
+
+        <section class="top-news">
+            <div class="top-news__aside article__aside">
+                <a class="aylana-label" href="#"><span>Сўнгги  янгиликлар</span></a>
+                <ul>
+                    <li class="last__news_lenta"><a href="">
+                        <div><span class="time-ui">23:55 / 30.03.2023</span></div>
+                        <p>“Биз битта эл ва битта юртмиз!” &#8722; президент қорақалпоғистонликлар билан учрашди</p>
+                    </a></li>
+                    <li class="last__news_lenta"><a href="">
+                        <div><span class="time-ui">23:55 / 30.03.2023</span></div>
+                        <p>“Биз битта эл ва битта юртмиз!” &#8722; президент қорақалпоғистонликлар билан учрашди</p>
+                    </a></li>
+                    <li class="last__news_lenta"><a href="">
+                        <div><span class="time-ui">23:55 / 30.03.2023</span></div>
+                        <p>“Биз битта эл ва битта юртмиз!” &#8722; президент қорақалпоғистонликлар билан учрашди</p>
+                    </a></li>
+                    <li class="last__news_lenta"><a href="">
+                        <div><span class="time-ui">23:55 / 30.03.2023</span></div>
+                        <p>“Биз битта эл ва битта юртмиз!” &#8722; президент қорақалпоғистонликлар билан учрашди</p>
+                    </a></li>
+                    <li class="last__news_lenta"><a href="">
+                        <div><span class="time-ui">23:55 / 30.03.2023</span></div>
+                        <p>“Биз битта эл ва битта юртмиз!” &#8722; президент қорақалпоғистонликлар билан учрашди</p>
+                    </a></li>
+                    <li class="last__news_lenta"><a href="">
+                        <div><span class="time-ui">23:55 / 30.03.2023</span></div>
+                        <p>“Биз битта эл ва битта юртмиз!” &#8722; президент қорақалпоғистонликлар билан учрашди“Биз битта эл ва битта юртмиз!” &#8722; президент қорақалпоғистонликлар билан учрашди</p>
+                    </a></li>
+                    <li class="last__news_lenta"><a href="">
+                        <div><span class="time-ui">23:55 / 30.03.2023</span></div>
+                        <p>“Биз битта эл ва битта юртмиз!” &#8722; президент қорақалпоғистонликлар билан учрашди“Биз битта эл ва битта юртмиз!” &#8722; президент қорақалпоғистонликлар билан учрашди</p>
+                    </a></li>
+                    <li class="last__news_lenta"><a href="">
+                        <div><span class="time-ui">22:02 / 30.03.2023</span></div>
+                        <p>Америка нашри журналисти ФХХ томонидан қўлга олинди. Бу ҳақда нималар маълум?</p>
+                    </a></li>
+                </ul>
+                <div><a href="#">Кўпроқ янгилик</a></div>
+            </div>
+            <div class="article-layout">
+                <div class="article-layout__header">
+                    <div class="header-time"><span class="time-ui">{{ maqola.created_at | date:"d/m/Y |f" }}</span></div>
+                    <div class="content-views"><span class="">{{ maqola.views }}</span></div>
+                    <div class="share-news">
+                        <a class="share-news__label" href="{% url 'article:share' maqola.id %}">Улашинг</a>
+                        {% comment %} <div class="share-news__dropdown">
+                            <div class="share-news__list">
+                                <a href="share.html">Facebook</a>
+                                <a href="https://www.instagram.com/hojiakbar_hasan/">Instagram</a>
+                                <a href="https://t.me/hojiakbar_bahodirovich">Telegram</a>
+                            </div>
+                        </div> {% endcomment %}
+                    </div>
+                </div>
+                <div class="article-layout__content">
+                    <h1>{{ maqola.title }}</h1>
+                    <h4>{{ maqola.subtitle }}</h4>
+                    <div class="content-img">
+                        <img src="{{ maqola.photo.url }}" alt="">
+                        <div class="main-img__caption">Muallif: {{ maqola.author }}</div>
+                    </div>
+                    <p dir="auto">{{ maqola.body }}</p>
+                    <div class="article-layout__bottom">
+                        <ul>
+                            
+                            <li class="bottom-tag"><a href="">{{ maqola.tag }}</a></li>
+                            
+                        </ul>
+                    </div>
+                </div>
+                <div class="article-layout__comment">
+                    <div class="comment-head"><span>4 comments</span>test</div>
+                    <div class="comment-form">
+                        <div class="comment-avatar">J</div>
+                        <form method = 'post' id="comment-form" onsubmit="myFunction(e)">
+                            {% csrf_token %}
+                            <input type="text" name="name" id="id_name" autocomplete="Name" required
+                            placeholder = 'Name'/>
+
+                            <input type="text" name="email" id="id_email" placeholder="E-mail"
+                                required
+                                />            
+
+                            <textarea name="body" id="id_body" rows="2" placeholder="body"></textarea>
+                           
+                            <input type="submit" value="send">
+                        </form>
+                    </div>
+                    <div class="comments-body">
+                        {% for comment in izohlar %}
+                        <div class="comments-list">
+                            <div class="comment-container" itemid="1">
+                                <div class="comment-avatar">{{ comment.name|slice:'1' }}</div>
+                                <div class="comment-info">
+                                    <div class="comment-info-head">
+                                        
+                                        <p class="comment-username">{{ comment.name }}</p>
+                                        <p class="comment-time time-ui">{{ comment.created_at }}</p>
+                                        
+                                    </div>
+                                    <p class="comment-context">{{ comment.body }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+        
+            </div>
+            <script>
+                function myFunction(e) {
+                    e.preventDefault();
+                  }
+            </script>
+            <div class="article__right">
+                {% most_comments %} <!-- eng kop izoh qoldirilganlar -->
+                {% popular_posts %} <!-- eng kop oqilgan postlar -->
+            </div>
+        </section>
+
+        <section class="bottom-news">
+            {% related_posts ids=maqola.category.id %}
+            {% comment %} <div class="tag-news">
+                <div class="tags-news__head">
+                    <a class="aylana-label" href="#"><span>Bog'langan postlar</span></a>
+                </div>
+                <div class="tags-news__grid">
+                    <a href="">
+                        <img src="./source/2sZBK0jVIxKzKyXHmVKILuHkZIVNSlDK_medium.jpg" alt="">
+                        <div class="tags-news__content">
+                            <div><span class="time-ui">22:02 / 28.03.2023</span></div>
+                            <p>Урушнинг иккинчи йили кетмоқда. Бу охиргиси бўладими?</p>
+                        </div>
+                    </a>
+                    <a href="">
+                        <img src="./source/2sZBK0jVIxKzKyXHmVKILuHkZIVNSlDK_medium.jpg" alt="">
+                        <div class="tags-news__content">
+                            <div><span class="time-ui">22:02 / 28.03.2023</span></div>
+                            <p>Урушнинг иккинчи йили кетмоқда. Бу охиргиси бўладими?</p>
+                        </div>
+                    </a>
+                    <a href="">
+                        <img src="./source/2sZBK0jVIxKzKyXHmVKILuHkZIVNSlDK_medium.jpg" alt="">
+                        <div class="tags-news__content">
+                            <div><span class="time-ui">22:02 / 28.03.2023</span></div>
+                            <p>Урушsdadadaиккинчи йили кетмоқда. Бу охиргиси бўладикетмоқда. Бу охиргиси бўладимикетмоқда. Бу охиргиси бўладимими?</p>
+                        </div>
+                    </a>
+                    <a href="">
+                        <img src="./source/2sZBK0jVIxKzKyXHmVKILuHkZIVNSlDK_medium.jpg" alt="">
+                        <div class="tags-news__content">
+                            <div><span class="time-ui">22:02 / 28.03.2023</span></div>
+                            <p>Урушsdadadaиккинчи йили кетмоқда. Бу охиргиси бўладикетмоқда. Бу охиргиси бўладимикетмоқда. Бу охиргиси бўладимими?</p>
+                        </div>
+                    </a>
+                </div>
+            </div> {% endcomment %}
+            <div class="biznes-news">
+                <div class="biznes-news__head">
+                    <a class="aylana-label" href="#"><span>Biznes</span></a>
+                </div>
+                <div class="biznes-carousel">
+                    <div class="carousel" data-flickity='{ "groupCells": 4 }'>
+
+                        <div class="carousel-cell">
+                            <a href="">
+                                <div class="carousel-img">
+                                    <img src="./source/b2 (1).jpg" alt="" srcset="">
+                                </div>
+                                <div class="carousel-content">
+                                    Базалт геосеткаси ва базалт иссиқлик сақловчи плиталари билан янада мустаҳкам
+                                </div>
+                            </a>
+                        </div>
+                        <div class="carousel-cell">
+                            <a href="">
+                                <div class="carousel-img">
+                                    <img src="./source/b2 (2).jpg" alt="" srcset="">
+                                </div>
+                                <div class="carousel-content">
+                                    Mobiuz юртимиздаги офислари тармоғини янгилашда давом этмоқда
+                                </div>
+                            </a>
+                        </div>
+                        <div class="carousel-cell">
+                            <a href="">
+                                <div class="carousel-img">
+                                    <img src="./source/b2 (3).jpg" alt="" srcset="">
+                                </div>
+                                <div class="carousel-content">
+                                    Тошкентда уч қитъани бирлаштирган чарм-пойабзал кўргазмаси иш бошлади
+                                </div>
+                            </a>
+                        </div>
+                        <div class="carousel-cell">
+                            <a href="">
+                                <div class="carousel-img">
+                                    <img src="./source/b2 (4).jpg" alt="" srcset="">
+                                </div>
+                                <div class="carousel-content">
+                                    Tenge Business: Бизнесингизни онлайн бошқаринг
+                                </div>
+                            </a>
+                        </div>
+                        <div class="carousel-cell">
+                            <a href="">
+                                <div class="carousel-img">
+                                    <img src="./source/b2 (3).jpg" alt="" srcset="">
+                                </div>
+                                <div class="carousel-content">
+                                    Базалт геосеткаси ва базалт иссиқлик сақловчи плиталари билан янада мустаҳкам
+                                </div>
+                            </a>
+                        </div>
+                        <div class="carousel-cell">
+                            <a href="">
+                                <div class="carousel-img">
+                                    <img src="./source/KmLDjjx7UpPG3D6HNfcfHQmenryFBxgA_medium.jpg" alt="" srcset="">
+                                </div>
+                                <div class="carousel-content">
+                                    Базалт геосеткаси ва базалт иссиқлик сақловчи плиталари билан янада мустаҳкам
+                                </div>
+                            </a>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+<div style="text-align: center;">
+    <h1>{{ maqola.title }}</h1>
+    <h4>{{ maqola.subtitle }}</h4>
+    <img src="{{ maqola.photo.url }}", height="500", width="700">
+    <p>{{ maqola.body }}</p>
+    {% if maqola.video %}
+    <video src="{{ maqola.video.url }}" controls height="500", width="700"></video>
+    {% endif %} 
+</div>
+<br>
+<div style="display: flex; gap: 25px;">
+    <span>Mualif: {{ maqola.author }}</span>
+    <span>{{ maqola.tag }}</span>
+    <span>👁: {{ maqola.views }}</span>
+    <span>📅: {{ maqola.created_at }}</span>
+    <button> <a href="{% url 'article:share' maqola.id %}"> Yuborish </a> </button>
+</div>
+<br>
+
+
+<H1>Comments</H1>
+    {% for comment in izohlar %}
+        <h3>{{ comment.name }}</h3>
+        <h5>{{ comment.email }}</h5>
+        <p>{{ comment.body }}</p>
+        <h6>{{ comment.created_at }} </h6>
+    {% endfor %}
+
+    <h1>Yangi Izoh</h1>
+        {% if yangi_izoh %}
+            <h2> Izohingiz muvafaqiyatli qoldirildi!</h2>
+        {% else %}
+            <form method='post'>
+                {{ izoh_maydoni.as_p }}
+                {% csrf_token %}
+                <input type='submit' value='Qoldirish'>
+            </form> 
+
+        {% endif %}
+        <hr>
+        
+        <h1> Bog'langan postlar</h1>
+            {% related_posts ids=maqola.category.id %}
+
+
+{% endblock content %}
+

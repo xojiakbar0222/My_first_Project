@@ -1,0 +1,13 @@
+
+
+
+    <div class="top-news__aside">
+        <a class="aylana-label" href="#"><span>Ko'p o'qilganlar</span></a>
+        <ul>
+            {% for post in posts %}
+            <li class="last__news_lenta"><a href="{{ post.get_absolute_url }}">
+                <div><span class="time-ui">{{ post.created_at }}</span></div>
+                <p>{{ post.title }}</p>
+            </a></li>
+            {% endfor %}
+        </ul>
