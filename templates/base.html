@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Kun.UZ</title>
+    <title>News_of_Life</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
@@ -28,6 +28,14 @@
                            {% for category in categories %}
                             <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
                             {% endfor %}    
+                            <li><a href="">"                                                                   "</a></li>
+                            <div style="display:flex;justify-content:flex-end;">
+                                <ul style="list-style:none;margin:0;">
+                                    <li style="margin-left:1em;border:1px solid #ccc;padding:0.5em;background-color:#f7f7f7;border-radius:4px;">
+                                    <a href="https://www.instagram.com/hojiakbar_hasan/" style="text-decoration:none;color:#333;">Presented by: Khasanov Khojiakbar</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </ul>
                     </div>
                 </nav>
